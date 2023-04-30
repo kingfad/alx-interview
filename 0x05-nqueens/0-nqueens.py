@@ -34,7 +34,7 @@ if __name__ == '__main__':
             safe = True
             for cordinate in queens_cord:
                 col = cordinate[1]
-                if(col == c or col + (r-cordinate[0]) == c or
+                if (col == c or col + (r-cordinate[0]) == c or
                         col - (r-cordinate[0]) == c):
                     safe = False
                     break
