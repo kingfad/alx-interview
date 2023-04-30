@@ -22,67 +22,67 @@ if __name__ == '__main__':
     solutions = []
     queens_cord = []  # coordinates format [row, column]
     stop = False
-    row = 0
-    column = 0
+    r = 0
+    c = 0
 
-    # iterate through rows
-    while row < n:
+    # iterate thru rows
+    while r < n:
         goback = False
-        # iterate through columns
-        while column < n:
+        # iterate thru columns
+        while c < n:
             # check is current column is safe
             safe = True
             for cordinate in queens_cord:
                 col = cordinate[1]
-                if(col == column or col + (row-cordinate[0]) == column or
-                        col - (row-cordinate[0]) == column):
+                if(col == c or col + (r-cordinate[0]) == c or
+                        col - (r-cordinate[0]) == c):
                     safe = False
                     break
 
             if not safe:
-                if column == n - 1:
+                if c == n - 1:
                     goback = True
                     break
-                column += 1
+                c += 1
                 continue
 
             # place queen
-            cordinates = [row, column]
+            cordinates = [r, c]
             queens_cord.append(cordinates)
             # if last row, append solution and reset all to last unfinished row
             # and last safe column in that row
-            if row == n - 1:
+            if r == n - 1:
                 solutions.append(queens_cord[:])
                 for cordinate in queens_cord:
                     if cordinate[1] < n - 1:
-                        row = cordinate[0]
-                        column = cordinate[1]
-                for i in range(n - row):
+                        r = cordinate[0]
+                        c = cordinate[1]
+                for i in range(n - r):
                     queens_cord.pop()
-                if row == n - 1 and column == n - 1:
+                if r == n - 1 and c == n - 1:
                     queens_cord = []
                     stop = True
-                row -= 1
-                column += 1
+                r -= 1
+                c += 1
             else:
-                column = 0
+                c = 0
             break
         if stop:
             break
         # on fail: go back to previous row
         # and continue from last safe column + 1
         if goback:
-            row -= 1
-            while row >= 0:
-                column = queens_cord[row][1] + 1
-                del queens_cord[row]  # delete previous queen coordinates
-                if column < n:
+            r -= 1
+            while r >= 0:
+                c = queens_cord[r][1] + 1
+                del queens_cord[r]  # delete previous queen coordinates
+                if c < n:
                     break
-                row -= 1
-            if row < 0:
+                r -= 1
+            if r < 0:
                 break
             continue
-        row += 1
+        r += 1
 
     for index, val in enumerate(solutions):
         if index == len(solutions) - 1:
