@@ -1,4 +1,8 @@
+#!/usr/bin/python3
+'''N-Queens Challenge'''
+
 import sys
+
 
 def solve_n_queens(row, board, N):
     if row == N:
